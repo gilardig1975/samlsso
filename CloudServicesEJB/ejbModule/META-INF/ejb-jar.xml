@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ejb-jar xmlns="http://xmlns.jcp.org/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/ejb-jar_3_2.xsd" version="3.2">
+	<display-name>CloudServicesEJB</display-name>
+	<enterprise-beans>
+		<session>
+			<ejb-name>CloudMessageService</ejb-name>
+			<ejb-class>it.ibm.cs.sample.ejbs.CloudMessageService</ejb-class>
+			<session-type>Stateless</session-type>
+			<init-on-startup>false</init-on-startup>
+			<transaction-type>Container</transaction-type>
+			<passivation-capable>true</passivation-capable>
+		</session>
+	</enterprise-beans>
+</ejb-jar>

@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?><xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" targetNamespace="http://ejbs.sample.cs.ibm.it/" version="1.0" xmlns:tns="http://ejbs.sample.cs.ibm.it/">
+
+  <xs:element name="callLocalService" type="tns:callLocalService"/>
+
+  <xs:element name="callLocalServiceResponse" type="tns:callLocalServiceResponse"/>
+
+  <xs:element name="getMessage" type="tns:getMessage"/>
+
+  <xs:element name="getMessageResponse" type="tns:getMessageResponse"/>
+
+  <xs:complexType name="getMessage">
+    <xs:sequence/>
+  </xs:complexType>
+
+  <xs:complexType name="getMessageResponse">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="return" type="xs:string"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="callLocalService">
+    <xs:sequence/>
+  </xs:complexType>
+
+  <xs:complexType name="callLocalServiceResponse">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="return" type="xs:string"/>
+    </xs:sequence>
+  </xs:complexType>
+</xs:schema>

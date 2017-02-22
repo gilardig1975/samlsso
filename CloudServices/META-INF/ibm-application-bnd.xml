@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<application-bnd
+	xmlns="http://websphere.ibm.com/xml/ns/javaee"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://websphere.ibm.com/xml/ns/javaee http://websphere.ibm.com/xml/ns/javaee/ibm-application-bnd_1_2.xsd"
+	version="1.2">
+
+	<security-role name="CloudServiceAccessRole">
+		<group name="CloudServiceUsers" access-id="group:samlsso.sample.net/CN=CloudServiceUsers,dc=samlsso,dc=sample,dc=net"/>
+	</security-role>
+</application-bnd>
