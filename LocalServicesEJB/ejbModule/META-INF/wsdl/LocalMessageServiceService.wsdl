@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definitions name="LocalMessageServiceService" targetNamespace="http://ejbs.sample.ls.ibm.it/" xmlns="http://schemas.xmlsoap.org/wsdl/" xmlns:sp13="http://docs.oasis-open.org/ws-sx/ws-securitypolicy/200802" xmlns:wsp="http://www.w3.org/ns/ws-policy" xmlns:sp="http://docs.oasis-open.org/ws-sx/ws-securitypolicy/200702" xmlns:tns="http://ejbs.sample.ls.ibm.it/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:wsp1_2="http://schemas.xmlsoap.org/ws/2004/09/policy" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd" xmlns:wsam="http://www.w3.org/2007/05/addressing/metadata">
+  <types>
+    <xsd:schema>
+      <xsd:import namespace="http://ejbs.sample.ls.ibm.it/" schemaLocation="LocalMessageServiceService_schema1.xsd"/>
+    </xsd:schema>
+  </types>
+  <message name="getLocalMessageResponse">
+    <part name="parameters" element="tns:getLocalMessageResponse">
+    </part>
+  </message>
+  <message name="getLocalMessage">
+    <part name="parameters" element="tns:getLocalMessage">
+    </part>
+  </message>
+  <portType name="LocalMessageService_SEI">
+    <operation name="getLocalMessage">
+      <input message="tns:getLocalMessage" wsam:Action="http://ejbs.sample.ls.ibm.it/LocalMessageService_SEI/getLocalMessageRequest">
+    </input>
+      <output message="tns:getLocalMessageResponse" wsam:Action="http://ejbs.sample.ls.ibm.it/LocalMessageService_SEI/getLocalMessageResponse">
+    </output>
+    </operation>
+  </portType>
+  <binding name="LocalMessageServicePortBinding" type="tns:LocalMessageService_SEI">
+    <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+    <wsp:PolicyReference URI="#SAMLBearerPolicy"/>
+    <operation name="getLocalMessage">
+      <soap:operation soapAction=""/>
+      <input>
+        <soap:body use="literal"/>
+      </input>
+      <output>
+        <soap:body use="literal"/>
+      </output>
+    </operation>
+  </binding>
+  <service name="LocalMessageServiceService">
+    <port name="LocalMessageServicePort" binding="tns:LocalMessageServicePortBinding">
+      <soap:address location="http://localhost/LocalServicesEJB/LocalMessageServiceService"/>
+    </port>
+  </service>
+	<wsp:Policy wsu:Id="SAMLBearerPolicy">
+		<wsp:ExactlyOne>
+			<wsp:All>
+				<sp:TransportBinding>
+					<wsp:Policy>
+						<sp:TransportToken>
+							<wsp:Policy>
+								<sp:HttpsToken>
+									<wsp:Policy/>
+								</sp:HttpsToken>
+							</wsp:Policy>
+						</sp:TransportToken>
+						<sp:Layout>
+							<wsp:Policy>
+								<sp:Lax/>
+							</wsp:Policy>
+						</sp:Layout>
+						<sp:IncludeTimestamp/>
+						<sp:AlgorithmSuite>
+							<wsp:Policy>
+								<sp:Basic128/>
+							</wsp:Policy>
+						</sp:AlgorithmSuite>
+					</wsp:Policy>
+				</sp:TransportBinding>
+				<sp:SupportingTokens>
+					<wsp:Policy>
+						<sp:SamlToken sp:IncludeToken="http://docs.oasis-open.org/ws-sx/ws-securitypolicy/200702/IncludeToken/AlwaysToRecipient">
+							<wsp:Policy>
+								<sp:WssSamlV20Token11/>
+							</wsp:Policy>
+						</sp:SamlToken>
+					</wsp:Policy>
+				</sp:SupportingTokens>
+			</wsp:All>
+		</wsp:ExactlyOne>
+	</wsp:Policy>
+</definitions>
