@@ -6,7 +6,7 @@
 <%@page import="javax.xml.transform.TransformerFactory"%>
 <%@page import="org.w3c.dom.Element"%>
 <%@page import="java.lang.reflect.Field"%>
-<%@page import="com.ibm.websphere.security.saml2.Saml20Token"%>
+<%--@page import="com.ibm.websphere.security.saml2.Saml20Token"--%>
 <%@page import="java.util.List"%>
 <%@page import="com.ibm.websphere.security.cred.WSCredential"%>
 <%@page import="java.util.Iterator"%>
