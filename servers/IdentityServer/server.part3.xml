@@ -1,0 +1,51 @@
+<server description="new server">
+
+    <!-- Enable features -->
+    <featureManager>
+        <feature>javaee-7.0</feature>
+        <feature>localConnector-1.0</feature>
+    	<feature>identityProvider-1.0</feature>
+		<feature>ldapRegistry-3.0</feature>
+		<feature>spnego-1.0</feature>
+	</featureManager>
+	<ldapRegistry baseDN="dc=samlsso,dc=sample,dc=net" bindDN="cn=wlpuser,cn=users,dc=samlsso,dc=sample,dc=net" bindPassword="Passw0rd" host="Base-Win2k8x64.samlsso.sample.net" ldapType="Microsoft Active Directory" port="389">
+		<activedFilters/>
+	</ldapRegistry>
+	<spnego canonicalHostName="false" disableFailOverToAppAuthType="false" includeClientGSSCredentialInSubject="false" krb5Config="C:\Windows\krb5.ini" krb5Keytab="C:\Windows\win7pro.keytab" servicePrincipalNames="HTTP/win7pro.samlsso.sample.net" trimKerberosRealmNameFromPrincipal="true">
+	</spnego>
+    <!-- This template enables security. To get the full use of all the capabilities, a keystore and user registry are required. -->
+    
+    <!-- For the keystore, default keys are generated and stored in a keystore. To provide the keystore password, generate an 
+         encoded password using bin/securityUtility encode and add it below in the password attribute of the keyStore element. 
+         Then uncomment the keyStore element. -->
+    <keyStore location="${server.output.dir}/resources/security/identitykey.jks" password="passw0rd"/> 
+    
+    <!--For a user registry configuration, configure your user registry. For example, configure a basic user registry using the
+        basicRegistry element. Specify your own user name below in the name attribute of the user element. For the password, 
+        generate an encoded password using bin/securityUtility encode and add it in the password attribute of the user element. 
+        Then uncomment the user element. -->    
+
+    <!-- To access this server from a remote client add a host attribute to the following element, e.g. host="*" -->
+    <httpEndpoint host="*" httpPort="80" httpsPort="443" id="defaultHttpEndpoint"/>
+                  
+    <!-- Automatically expand WAR files and EAR files -->
+    <applicationManager autoExpand="true"/>
+
+    <keyStore id="saml" location="${server.config.dir}/resources/security/samlkey.jks" password="idpstorepass">
+    	<keyEntry keyPassword="idpkeypass" name="idpkey"/>
+    </keyStore>
+    <identityProvider hostname="win7pro.samlsso.sample.net" issuer="samlsso.sample.net" keyAlias="idpkey" keyStoreRef="saml" port="443" webContextPath="idpweb"/>
+
+	<authorization-roles id="idp.roles">
+		<security-role name="IdentityRequestor">
+			<special-subject type="ALL_AUTHENTICATED_USERS"/>
+		</security-role>
+		<security-role name="Snooper">
+			<special-subject type="ALL_AUTHENTICATED_USERS"/>
+		</security-role>
+	</authorization-roles>
+
+    <applicationMonitor updateTrigger="mbean"/>
+
+    <enterpriseApplication id="IdentityProviderAuthenticator" location="IdentityProviderAuthenticator.ear" name="IdentityProviderAuthenticator"/>
+</server>
