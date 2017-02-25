@@ -19,34 +19,40 @@
 <b>
 <%
 	Subject subject = WSSubject.getRunAsSubject();
-	out.write("Welcome " + subject.getPrincipals());
+	if (subject != null)
+	{
+		out.write("Welcome " + subject.getPrincipals());
 %>
 </b>
 <br />
 <%
-Set<?> credentials = subject.getPublicCredentials();
-if (credentials != null)
-{
-	Iterator<?> iterator = credentials.iterator();
-	while (iterator.hasNext())
-	{
-		Object o = iterator.next();
-		if (o instanceof WSCredential)
+		Set<?> credentials = subject.getPublicCredentials();
+		if (credentials != null)
 		{
-			WSCredential credential = (WSCredential) o;
-			List<?> groups = credential.getGroupIds();
-			for (Object g : groups)
+			Iterator<?> iterator = credentials.iterator();
+			while (iterator.hasNext())
 			{
-				out.write(g.toString() + "<br />");
+				Object o = iterator.next();
+				if (o instanceof WSCredential)
+				{
+					WSCredential credential = (WSCredential) o;
+					List<?> groups = credential.getGroupIds();
+					for (Object g : groups)
+					{
+						out.write(g.toString() + "<br />");
+					}
+				} else
+				{
+					out.write(o.toString() + "<br />");
+				}
 			}
-		} else
-		{
-			out.write(o.toString() + "<br />");
 		}
+	} else
+	{
+		out.write("<b>Bye [unauthenticated user]</b> - <a href=\"home\">Login</a>");
 	}
-}
 %>
-<br />
+<!-- <br /> -->
 <%
 /*credentials = subject.getPrivateCredentials();
 if (credentials != null)
@@ -77,4 +83,3 @@ if (credentials != null)
 	}
 }*/
 %>
-<br />

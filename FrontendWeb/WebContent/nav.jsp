@@ -28,7 +28,7 @@
 	</li>
 	<li>
 		<div id="logout" style="padding: 10px;">
-			<a href="ibm_security_logout?logoutExitPage=.">Logout</a><br />
+			<a href="ibm_security_logout?logoutExitPage=unprotected.jsp">Logout</a><br />
 			<p></p>
 		</div>
 	</li>
