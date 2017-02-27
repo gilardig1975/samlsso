@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<diagram>
+<?xml version="1.0" encoding="UTF-8"?><diagram>
 <source><![CDATA[# ![Basic Authentication]
 User:Actor
 ua:UserAgent[p] "UA"
@@ -51,7 +50,7 @@ and password.
 *1
 
   idp:ua.negotiate
-  ua:idp.authorize(user, pwd)
+  ua:idp.authorize(kerberos)
 
   idp:dc.authenticate(spnego)
 
