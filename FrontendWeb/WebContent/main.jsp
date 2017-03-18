@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>ISP Demo</title>
+<title>SAML SSO Demo</title>
 <style type="text/css">
 ul {
 	list-style: none;
