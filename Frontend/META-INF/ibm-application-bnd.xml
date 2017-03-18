@@ -9,7 +9,7 @@
 		<special-subject type="ALL_AUTHENTICATED_USERS" />
 	</security-role>
 	<security-role name="FrontendAccessRole">
-		<group name="FrontendServiceUsers" access-id="group:samlsso.sample.net/CN=FrontendServiceUsers,dc=samlsso,dc=sample,dc=net"/>
+		<group name="FrontendServiceUsers" access-id="group:samlsso.sample.net/CN=FrontendServiceUsers,DC=samlsso,DC=sample,DC=net"/>
 	</security-role>
 
 </application-bnd>
