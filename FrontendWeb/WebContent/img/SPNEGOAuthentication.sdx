@@ -2,11 +2,14 @@
 <source><![CDATA[# ![Basic Authentication]
 User:Actor
 ua:UserAgent[p] "UA"
+os:UserAgent[p] "OS"
 sp:ServiceProvider[p] "SP"
 idp:IdentityProvider[p] "IdP"
 dc:DomainController[p] "DC"
 
-User:dc.login(user, pwd)
+User:os.login(user, pwd)
+
+os:dc.
 
 *1 dc
 DC authenticate the
@@ -26,7 +29,7 @@ if a saml token
 exists an is valid.
 *1
 
-[c:check if user not authenticated]
+[c:SP_initiated_SSO if user not authenticated]
 *1 sp
 If SAML is not valid the 
 SP post to the IdP
@@ -44,15 +47,32 @@ SAML token.
 
 
 *1 idp
-IdP starts the challenge
-to request username
-and password.
+Request is intercepted by
+SPNEGO feature.
+A negotiation
+is started by the
+IdP server runtime.
 *1
+  [c:SPNEGO_web_authentication if user not authenticated]
 
-  idp:ua.negotiate
-  ua:idp.authorize(kerberos)
+    idp:ua.negotiate
+    ua:os.requestTicket
+    os:dc.
+*1 dc
+DC receive the
+token request
+(TGS_REQ),
+generate the
+kerberos ticket
+and send it back
+(TGS_REP).
+*1
+    dc:os.returnTicket(kerberos)
+    os:ua.
 
-  idp:dc.authenticate(spnego)
+    ua:idp.authorize(kerberos)
+
+    idp:dc.authenticate(kerberos, spn)
 
 *1 dc
 DC receive the
@@ -61,8 +81,8 @@ with the subject
 information.
 *1
 
-  dc:idp.reply(subject)
-
+    dc:idp.reply(user, groups)
+  [/c]
 *1 idp
 IdP generates
 SAML token and post
