@@ -19,22 +19,22 @@
         generate an encoded password using bin/securityUtility encode and add it in the password attribute of the user element. 
         Then uncomment the user element. -->
 	<basicRegistry realm="samlsso.sample.net" ignoreCaseForAuthentication="false">
-		<group name="CN=IdentityRequestors,DC=samlsso,DC=sample,DC=net">
+		<group name="CN=IdentityRequestors,dc=samlsso,dc=sample,dc=net">
 			<member name="rob"/>
 			<member name="max"/>
 			<member name="bobby"/>
 			<member name="alice"/>
 		</group>
-		<group name="CN=FrontendServiceUsers,DC=samlsso,DC=sample,DC=net">
+		<group name="CN=FrontendServiceUsers,dc=samlsso,dc=sample,dc=net">
 			<member name="max"/>
 			<member name="bobby"/>
 			<member name="alice"/>
 		</group>
-		<group name="CN=CloudServiceUsers,DC=samlsso,DC=sample,DC=net">
+		<group name="CN=CloudServiceUsers,dc=samlsso,dc=sample,dc=net">
 			<member name="bobby"/>
 			<member name="alice"/>
 		</group>
-		<group name="CN=LocalServiceUsers,DC=samlsso,DC=sample,DC=net">
+		<group name="CN=LocalServiceUsers,dc=samlsso,dc=sample,dc=net">
 			<member name="alice"/>
 		</group>
 		<user name="rob" password="passw0rd"/>
